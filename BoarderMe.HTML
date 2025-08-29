@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arkitexx - Boarding House & Dorm Rental</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f5f0;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #8B4513;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #FFF8DC;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .logo span {
+            color: #F4A460;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #FFF8DC;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #A0522D;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #F4A460;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 80%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+            animation: fadeIn 2s ease-out;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: typewriter 3s steps(40, end), blink 0.75s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #F4A460;
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #F4A460; }
+        }
+
+        .hero-highlights {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .highlight {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 2s ease-out, float 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .highlight:hover {
+            transform: translateY(-5px);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #F4A460, #8B4513);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.4);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 5px rgba(244, 164, 96, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(244, 164, 96, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(244, 164, 96, 0.5); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #8B4513;
+            position: relative;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #F4A460, #8B4513);
+            border-radius: 3px;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Rooms Grid */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .filter-select {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #D2B48C;
+            border-radius: 25px;
+            background: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .filter-select:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            transform: translateY(0);
+        }
+
+        .room-card:hover {
+            transform: translateY(-15px) rotate(1deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .room-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .room-card:hover .room-image {
+            transform: scale(1.1);
+        }
+
+        .room-info {
+            padding: 1.5rem;
+        }
+
+        .room-type {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .room-features {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .room-features li {
+            margin: 0.3rem 0;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .room-features li:nth-child(1) { animation-delay: 0.1s; }
+        .room-features li:nth-child(2) { animation-delay: 0.2s; }
+        .room-features li:nth-child(3) { animation-delay: 0.3s; }
+        .room-features li:nth-child(4) { animation-delay: 0.4s; }
+
+        .room-features li i {
+            color: #F4A460;
+            margin-right: 0.5rem;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-5px); }
+            60% { transform: translateY(-3px); }
+        }
+
+        .room-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #8B4513;
+            margin: 1rem 0;
+            animation: popIn 0.6s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .inquire-button {
+            width: 100%;
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .inquire-button:hover {
+            background: linear-gradient(45deg, #A0522D, #8B4513);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .inquire-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255,255,255,0.3);
+            transform: rotate(30deg);
+            transition: all 0.6s;
+        }
+
+        .inquire-button:hover::after {
+            left: 120%;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: #8B4513;
+            margin-bottom: 1rem;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-list li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            animation: slideInRight 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .rules-list li:nth-child(1) { animation-delay: 0.1s; }
+        .rules-list li:nth-child(2) { animation-delay: 0.2s; }
+        .rules-list li:nth-child(3) { animation-delay: 0.3s; }
+        .rules-list li:nth-child(4) { animation-delay: 0.4s; }
+        .rules-list li:nth-child(5) { animation-delay: 0.5s; }
+        .rules-list li:nth-child(6) { animation-delay: 0.6s; }
+
+        .rules-list li:before {
+            content: "•";
+            color: #F4A460;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Amenities Section */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .amenity-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            transform: translateY(0);
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .amenity-card:nth-child(1) { animation-delay: 0.1s; }
+        .amenity-card:nth-child(2) { animation-delay: 0.2s; }
+        .amenity-card:nth-child(3) { animation-delay: 0.3s; }
+        .amenity-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .amenity-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .amenity-icon {
+            font-size: 3rem;
+            color: #F4A460;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .amenity-card:hover .amenity-icon {
+            transform: rotate(360deg) scale(1.2);
+        }
+
+        .amenity-card h3 {
+            color: #8B4513;
+            margin-bottom: 1rem;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .gallery-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(244,164,96,0.1), rgba(139,69,19,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-img:hover::before {
+            opacity: 1;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: all 0.4s ease;
+            animation: bounceIn 1s ease-out;
+        }
+
+        .booking-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            animation: slideInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .form-group:nth-child(5) { animation-delay: 0.5s; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #8B4513;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #D2B48C;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #F4A460;
+            box-shadow: 0 0 10px rgba(244, 164, 96, 0.3);
+            outline: none;
+            transform: scale(1.02);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.4s ease;
+            transform: translateY(0);
+            animation: flipInY 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .contact-card:nth-child(1) { animation-delay: 0.1s; }
+        .contact-card:nth-child(2) { animation-delay: 0.2s; }
+        .contact-card:nth-child(3) { animation-delay: 0.3s; }
+        .contact-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .contact-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: #F4A460;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        @keyframes flipInY {
+            from {
+                transform: perspective(400px) rotateY(90deg);
+                opacity: 0;
+            }
+            40% {
+                transform: perspective(400px) rotateY(-10deg);
+            }
+            70% {
+                transform: perspective(400px) rotateY(10deg);
+            }
+            to {
+                transform: perspective(400px) rotateY(0deg);
+                opacity: 1;
+            }
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(244, 164, 96, 0.5);
+            animation: zoomIn 0.5s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 1.5s infinite;
+        }
+
+        .close-lightbox:hover {
+            transform: rotate(90deg) scale(1.2);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: popIn 0.5s ease-out;
+            box-shadow: 0 0 50px rgba(244, 164, 96, 0.5);
+        }
+
+        .modal-button {
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .modal-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Particle background for hero section */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(244, 164, 96, 0.3);
+            border-radius: 50%;
+            animation: floatParticle 6s ease-in-out infinite;
+        }
+
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(-40px) translateX(-10px); }
+            75% { transform: translateY(-20px) translateX(-10px); }
+        }
+
+        /* Loading animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #8B4513;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 1.5s ease-out 2s forwards;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #F4A460;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#home" class="logo">Arkitexx<span>.</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#rooms">Rooms</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#amenities">Amenities</a></li>
+                    <li><a href="#booking">Booking</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1>Find Your Home Away From Home</h1>
+            <div class="hero-highlights">
+                <div class="highlight">Affordable</div>
+                <div class="highlight">Near Schools</div>
+                <div class="highlight">Safe & Secure</div>
+            </div>
+            <a href="#rooms" class="cta-button">View Rooms</a>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms">
+        <div class="container">
+            <h2 class="section-title">Available Rooms</h2>
+            <div class="filters">
+                <select id="typeFilter" class="filter-select">
+                    <option value="">All Types</option>
+                    <option value="single">Single</option>
+                    <option value="double">Double</option>
+                    <option value="aircon">Aircon</option>
+                    <option value="non-aircon">Non-Aircon</option>
+                </select>
+                <select id="priceFilter" class="filter-select">
+                    <option value="">All Prices</option>
+                    <option value="2000-3000">₱2,000 - ₱3,000</option>
+                    <option value="3000-4000">₱3,000 - ₱4,000</option>
+                    <option value="4000-5000">₱4,000 - ₱5,000</option>
+                </select>
+            </div>
+            <div class="rooms-grid" id="roomsGrid">
+                <!-- Room cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="background-color: #f0e6d2;">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Your Comfortable Home Away From Home</h3>
+                    <p>Welcome to Arkitexx Boarding House, where we provide comfortable and affordable accommodation for students and professionals in Central Visayas, Philippines.</p>
+                    <p>Our boarding house is strategically located near major schools, making it convenient for students to commute. We pride ourselves on maintaining a safe, clean, and welcoming environment for all our residents.</p>
+                    <h3>House Rules</h3>
+                    <ul class="rules-list">
+                        <li>Check-in time: 2:00 PM | Check-out time: 12:00 PM</li>
+                        <li>No loud noise after 10:00 PM</li>
+                        <li>Visitors allowed until 8:00 PM</li>
+                        <li>Keep common areas clean</li>
+                        <li>No pets allowed</li>
+                        <li>Respect fellow residents and staff</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Boarding House" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities">
+        <div class="container">
+            <h2 class="section-title">Our Amenities</h2>
+            <div class="amenities-grid">
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Common Kitchen</h3>
+                    <p>Shared kitchen facilities with cooking utensils and refrigerator</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Laundry Area</h3>
+                    <p>Washing machines and drying areas available for residents</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Water Dispenser</h3>
+                    <p>Clean drinking water available 24/7</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security</h3>
+                    <p>CCTV surveillance and gated entrance for safety</p>
+                </div>
+            </div>
+            
+            <h2 class="section-title" style="margin-top: 3rem;">Gallery</h2>
+            <div class="gallery">
+                <img src="https://images.pexels.com/photos/276625/pexels-photo-276625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Room 1" class="gallery-img" onclick="openLightbox(this.src)">
+                <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Room 2" class="gallery-img" onclick="openLightbox(this.src)">
+                <img src="https://images.pexels.com/photos/276671/pexels-photo-276671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Kitchen" class="gallery-img" onclick="openLightbox(this.src)">
+                <img src="https://images.pexels.com/photos/276713/pexels-photo-276713.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Common Area" class="gallery-img" onclick="openLightbox(this.src)">
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" style="background-color: #f0e6d2;">
+        <div class="container">
+            <h2 class="section-title">Book Your Stay</h2>
+            <form class="booking-form" id="bookingForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="roomType">Preferred Room Type</label>
+                        <select id="roomType" required>
+                            <option value="">Select Room Type</option>
+                            <option value="single-aircon">Single Aircon</option>
+                            <option value="single-non-aircon">Single Non-Aircon</option>
+                            <option value="double-aircon">Double Aircon</option>
+                            <option value="double-non-aircon">Double Non-Aircon</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration (Months)</label>
+                        <input type="number" id="duration" min="1" max="12" value="1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Additional Message</label>
+                    <textarea id="message" rows="4"></textarea>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%;">Submit Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Address</h3>
+                    <p>Central Visayas, Philippines</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Phone</h3>
+                    <p>+63 912 345 6789</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>info@arkitexx.com</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <h3>Facebook</h3>
+                    <p>Arkitexx Boarding House</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Arkitexx Boarding House. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="lightboxImg">
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <h2>Thank You!</h2>
+            <p>We'll contact you soon to confirm your booking.</p>
+            <button class="modal-button" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // Room data
+        const rooms = [
+            {
+                id: 1,
+                type: "Single Aircon",
+                features: ["WiFi", "Water", "Electricity", "Bed Included"],
+                price: 3500,
+                image: "https://images.pexels.com/photos/276625/pexels-photo-276625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            },
+            {
+                id: 2,
+                type: "Single Non-Aircon",
+                features: ["WiFi", "Water", "Electricity", "Bed Included"],
+                price: 2500,
+                image: "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            },
+            {
+                id: 3,
+                type: "Double Aircon",
+                features: ["WiFi", "Water", "Electricity", "2 Beds Included"],
+                price: 4500,
+                image: "https://images.pexels.com/photos/276671/pexels-photo-276671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            },
+            {
+                id: 4,
+                type: "Double Non-Aircon",
+                features: ["WiFi", "Water", "Electricity", "2 Beds Included"],
+                price: 3500,
+                image: "https://images.pexels.com/photos/276713/pexels-photo-276713.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            },
+            {
+                id: 5,
+                type: "Single Aircon",
+                features: ["WiFi", "Water", "Electricity", "Bed Included", "Study Desk"],
+                price: 4000,
+                image: "https://images.pexels.com/photos/276625/pexels-photo-276625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            },
+            {
+                id: 6,
+                type: "Double Non-Aircon",
+                features: ["WiFi", "Water", "Electricity", "2 Beds Included", "Balcony"],
+                price: 3800,
+                image: "https://images.pexels.com/photos/276713/pexels-photo-276713.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            }
+        ];
+
+        // Create floating particles for hero section
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                particle.style.animationDelay = `${Math.random() * 6}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Display rooms
+        function displayRooms(roomsToShow) {
+            const roomsGrid = document.getElementById('roomsGrid');
+            roomsGrid.innerHTML = '';
+            
+            roomsToShow.forEach((room, index) => {
+                const roomCard = document.createElement('div');
+                roomCard.className = 'room-card';
+                roomCard.style.animationDelay = `${index * 0.1}s`;
+                roomCard.innerHTML = `
+                    <img src="${room.image}" alt="${room.type}" class="room-image">
+                    <div class="room-info">
+                        <h3 class="room-type">${room.type}</h3>
+                        <ul class="room-features">
+                            ${room.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
+                        </ul>
+                        <div class="room-price">₱${room.price.toLocaleString()}/month</div>
+                        <button class="inquire-button" onclick="openBookingForm('${room.type}')">Inquire Now</button>
+                    </div>
+                `;
+                roomsGrid.appendChild(roomCard);
+            });
+        }
+
+        // Filter rooms
+        function filterRooms() {
+            const typeFilter = document.getElementById('typeFilter').value;
+            const priceFilter = document.getElementById('priceFilter').value;
+            
+            let filteredRooms = rooms;
+            
+            if (typeFilter) {
+                filteredRooms = filteredRooms.filter(room => 
+                    room.type.toLowerCase().includes(typeFilter.toLowerCase())
+                );
+            }
+            
+            if (priceFilter) {
+                const [min, max] = priceFilter.split('-').map(Number);
+                filteredRooms = filteredRooms.filter(room => 
+                    room.price >= min && room.price <= max
+                );
+            }
+            
+            displayRooms(filteredRooms);
+        }
+
+        // Lightbox functions
+        function openLightbox(src) {
+            document.getElementById('lightbox').style.display = 'flex';
+            document.getElementById('lightboxImg').src = src;
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Modal functions
+        function openModal() {
+            document.getElementById('confirmationModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+        }
+
+        // Booking form functions
+        function openBookingForm(roomType) {
+            document.getElementById('roomType').value = roomType.toLowerCase().replace(' ', '-');
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+            
+            // Add animation to the form
+            const form = document.querySelector('.booking-form');
+            form.style.animation = 'none';
+            setTimeout(() => {
+                form.style.animation = 'bounceIn 1s ease-out';
+            }, 10);
+        }
+
+        // Form validation
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const roomType = document.getElementById('roomType').value;
+            const duration = document.getElementById('duration').value;
+            
+            // Simple validation
+            if (!name || !email || !phone || !roomType || !duration) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // If validation passes, show confirmation
+            openModal();
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Scroll animation for sections
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.75) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create particles
+            createParticles();
+            
+            // Display rooms
+            displayRooms(rooms);
+            
+            // Add event listeners to filters
+            document.getElementById('typeFilter').addEventListener('change', filterRooms);
+            document.getElementById('priceFilter').addEventListener('change', filterRooms);
+            
+            // Smooth scrolling for navigation
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active class
+                    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Add scroll event listener for animations
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Trigger initial scroll animation
+            setTimeout(animateOnScroll, 100);
+        });
+
+        // Close lightbox when clicking outside
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('confirmationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Add hover effects to all buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('button, .cta-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
